@@ -8,6 +8,24 @@ eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml
 cap = cv2.VideoCapture(0)
 
 
+detector_params = cv2.SimpleBlobDetector_Params()
+detector_params.filterByArea = True
+detector_params.maxArea = 1500
+detector = cv2.SimpleBlobDetector_create(detector_params)
+
+
+
+def blob_process(img, threshold, detector):
+    gray_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    _, img = cv2.threshold(gray_frame, threshold, 255, cv2.THRESH_BINARY)
+    img = cv2.erode(img, None, iterations=2)
+    img = cv2.dilate(img, None, iterations=4)
+    img = cv2.medianBlur(img, 5)
+    keypoints = detector.detect(img)
+    print(keypoints)
+    return keypoints
+
+
 def nothing(x):
     pass
 
@@ -38,13 +56,21 @@ while True:
         eyes = eye_cascade.detectMultiScale(gray_face)
         for (ex, ey, ew, eh) in eyes:
             face_height = np.size(color_face, 0)  
+
             if ey < face_height / 2:
                 cv2.rectangle(color_face, (ex, ey), (ex+ew, ey+eh), (0, 225, 255), 2)
+                eye = color_face[ey:ey+eh, ex:ex+ew]
+                keypoints = blob_process(eye, threshold, detector)
+                eye = cv2.drawKeypoints(eye, keypoints, eye, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
 
     cv2.imshow("Camera", frame)
 
     if 'cut_face' in globals():
         cv2.imshow("Eyes", cut_face)
+
+    if 'eye' in globals():
+        cv2.imshow("Eye", eye)
 
     k = cv2.waitKey(10)
     if k == ESC & 0xff:
