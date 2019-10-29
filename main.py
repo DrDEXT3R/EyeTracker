@@ -7,6 +7,13 @@ eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml
 
 cap = cv2.VideoCapture(0)
 
+
+def nothing(x):
+    pass
+
+cv2.namedWindow('Settings')
+cv2.createTrackbar('threshold', 'Settings', 0, 255, nothing)
+
 while True:
     ret, frame = cap.read()
     frame = cv2.flip(frame, 1)
@@ -24,7 +31,8 @@ while True:
         faceHeight = gray_face.shape[0]
 
         cut_face = gray_face[int(faceHeight/4):int(faceHeight/1.7), :]
-        _, cut_face = cv2.threshold(cut_face, 127, 255, cv2.THRESH_BINARY)
+        threshold = cv2.getTrackbarPos('threshold', 'Settings')
+        _, cut_face = cv2.threshold(cut_face, threshold, 255, cv2.THRESH_BINARY)
 
         # Detect eyes
         eyes = eye_cascade.detectMultiScale(gray_face)
@@ -35,7 +43,8 @@ while True:
 
     cv2.imshow("Camera", frame)
 
-    cv2.imshow("Eyes", cut_face)
+    if 'cut_face' in globals():
+        cv2.imshow("Eyes", cut_face)
 
     k = cv2.waitKey(10)
     if k == ESC & 0xff:
