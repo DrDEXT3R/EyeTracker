@@ -80,9 +80,6 @@ while True:
     if 'eyes_to_set_up' in globals():
         cv2.imshow("Settings", eyes_to_set_up)
 
-    # if 'eye' in globals():
-    #     cv2.imshow("Eye", eye)
-
     k = cv2.waitKey(10)
     if k == ESC & 0xff:
         break
