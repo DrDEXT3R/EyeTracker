@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "/home/drdext3r/VirtualEnvs/EyeTracker/bin/python3"
-    "python.terminal.activateEnvironment": true
-    "python.linting.pylintArgs": ["--extension-pkg-whitelist=cv2"]
-}
