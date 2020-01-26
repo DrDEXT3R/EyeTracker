@@ -2,9 +2,11 @@
 
 It is a program for tracking and marking irises on webcam images.  
   
-![Demo 1](demo1.gif)  
+## Demo
+
+![Demo 1](demo/demo1.gif)  
   
-![Demo 2](demo2.gif)  
+![Demo 2](demo/demo2.gif)  
 
 ## Getting Started
 
