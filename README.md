@@ -1,6 +1,6 @@
 # Eye Tracker
 
-It is a program for tracking and marking irises on webcam images.  
+It is a program for tracking and marking irises on webcam images. Due to the possibility of adjusting the threshold value in the settings window, the application works correctly in different lighting conditions. All tests were carried out on an average webcam (0.3 MP) embedded in a laptop computer. 
   
 ## Demo
 
@@ -47,4 +47,4 @@ After starting the program, set the threshold value in the settings window in su
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/DrDEXT3R/EyeTracker/blob/master/LICENSE) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/DrDEXT3R/EyeTracker/blob/master/LICENSE) file for details.
